@@ -10,7 +10,7 @@ class GradientContainer extends StatelessWidget {
   final Color color2;
   final Color color3;
 
-  GradientContainer(
+  const GradientContainer(
     this.color1,
     this.color2,
     this.color3, {
