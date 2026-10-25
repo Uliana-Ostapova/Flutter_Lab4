@@ -1,17 +1,72 @@
-# flutter_lab4_app
+# Лабораторная работа №4-5. Flutter: структура UI и компонентный подход.
+**Фамилия, имя:** Остапова Ульяна
 
-A new Flutter project.
+**Группа:** ИСП-241
 
-## Getting Started
+**Дата сдачи:** 25.10.2026
 
-This project is a starting point for a Flutter application.
+## Что изучено
+- Постройка UI через дерево виджетов.
+- Создание собственных виджет-классов.
+- Разделение кода на отдельные файлы.
+- передача данных между виджетами через параметры конструктора.
 
-A few resources to get you started if this is your first Flutter project:
+## Скриншот финального приложения
+![приложение](img/step6_Ostapova.png)
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Ссылка на репозиторий
+[Ссылка на GitHub](https://github.com/Uliana-Ostapova/Flutter_Lab4.git)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Инструкция по запуску
+1. Клонировать репозиторий:
+`git clone ссылка_на_репозиторий`
+2. Перейти в папку проекта
+`cd flutter_Lab4`
+3. Выполнить
+`flutter pub get`
+4. Запустить приложение в браузере
+`flutter run -d chrome`
+
+## Ответы на вопросы
+**1. Зачем выносить виджеты в отдельные файлы? Что изменится если держать всё в `main.dart`?**
+
+Вынос файлов в отдельные файлы делает код более понятным и организованным. Если хранить всё в `main.dart`, файл станет большим и искать нужный код будет сложнее.
+
+**2. Что такое `BuildContext`? Почему метод `build()` принимает его как параметр?**
+
+`BuildContext` содержит информацию о положении виджета в дереве виджетов Flutter. Метод `build()` принимает `BuildContext` как параметр, потому что Flutter передаёт его автоматически, чтобы виджет мог получать информацию о своём месте в дереве виджетов и обращаться к окружающим его элементам интерфейса.
+
+**3. Чем `StatelessWidget` отличается от `StatefulWidget`? Приведите пример когда нужен каждый из них.**
+
+`StatelessWidget` используется для виджетов, состояние которых не меняется, например для статичного текста или фона:
+```dart
+class StyledText extends StatelessWidget {
+  final String text;
+  const StyledText(this.text, {super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 32,
+      ),
+    );
+  }
+}
+```
+`StatefulWidget` применяется когда интерфейс должен изменяться во время работы приложения. В данном приложении используется для смены изображения при нажатии на кнопку. Пример:
+```dart
+class DiceRoller extends StatefulWidget {
+  const DiceRoller({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return _DiceRollerState();
+  }
+}
+```
+
+**4. Почему `Random()` создаётся на уровне файла, а не внутри `rollDice()`?**
+
+`Random()` создаётся на уровне файла, чтобы использовать один и тот же генератор случайных числе при каждом вызове метода `rollDice()`, вместо того чтобы создавать новый объект при каждом нажатии кнопки.
